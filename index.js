@@ -31,7 +31,7 @@ client.connect(err => {
         const registered= req.body;
         registerActivityCollection.insertOne(registered)
         .then(result=>{
-            res.redirect('https://vlounteer-project.web.app/ingleUserActivities')
+            res.redirect('https://vlounteer-project.web.app/singleUserActivities')
         })
     });
 /*=====LOAD ALL ACTIVITY=====*/
