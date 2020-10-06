@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ADMIN Panel...</h1>
+    <form action="/allActivity" method="POST">
+        <input type="text" name="key" placeholder="key">
+        <input type="text" name="title" placeholder="title">
+        <input type="text" name="description" placeholder="description">
+        <input type="text" name="date" placeholder="date">
+        <input type="submit" value="Add Activity">
+    </form>
+    <div id="container"></div>
+    <script>
+        function cancel(event,id){
+            fetch(`/delete/${id}`,{
+                method:'DELETE'
+            })
+            .then(res=>res.json())
+            .then(result=>{
+                if(result){
+                    event.target.parentNode.style.display="none";
+                }
+            })
+        }
+        fetch('/registerActivity')
+        .then(res=>res.json())
+        .then(data=>{
+            let container = document.getElementById('container');
+            data.forEach(item =>{
+                let ul = document.createElement('ul');
+                ul.innerHTML=`
+                    <span>${item.name}</span>
+                    <span>${item.email}</span>
+                    <span>${item.date}</span>
+                    <span>${item.title}</span>
+                    <button onclick="cancel(event,'${item._id}')">delete</button>
+                `
+                container.appendChild(ul);
+            })
+        })
+    </script>
+</body>
+</html>
