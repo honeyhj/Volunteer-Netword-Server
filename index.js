@@ -3,7 +3,7 @@ const bodyParser=require('body-parser');
 const cors=require('cors');
 const { ObjectID } = require('mongodb');
 require('dotenv').config();
-const PORT=5500;
+const port=5500;
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.qulux.mongodb.net/volunteerActivity?retryWrites=true&w=majority`;
@@ -70,4 +70,4 @@ client.connect(err => {
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/index.html')
 })
-app.listen(PORT);
+app.listen(process.env.PORT || port);
